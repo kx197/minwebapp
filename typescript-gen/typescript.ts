@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-01 14:21:06
+Date: 2021-01-01 20:14:16
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -15,6 +15,7 @@ BaseUrl: https://localhost:5001
 //DefaultImports: 
 */
 
+// @ts-nocheck
 
 export interface IReturn<T>
 {
@@ -41,7 +42,7 @@ export class Company
     public name: string;
 
     // @DataMember
-    public subname: string;
+    public subname?: string | null;
 
     // @DataMember
     // @Required()
@@ -52,16 +53,16 @@ export class Company
     public statusDate: string;
 
     // @DataMember
-    public turnoverCurrencyId: string;
+    public turnoverCurrencyId?: string | null;
 
     // @DataMember
-    public turnoverAmount: number;
+    public turnoverAmount?: number | null;
 
     // @DataMember
-    public employeeCount: number;
+    public employeeCount?: number | null;
 
     // @DataMember
-    public note: string;
+    public note?: string | null;
 
     public constructor(init?: Partial<Company>) { (Object as any).assign(this, init); }
 }
@@ -73,13 +74,13 @@ export class ResponseError
     public errorCode: string;
 
     // @DataMember(Order=2)
-    public fieldName: string;
+    public fieldName?: string | null;
 
     // @DataMember(Order=3)
-    public message: string;
+    public message?: string | null;
 
     // @DataMember(Order=4)
-    public meta: { [index: string]: string; };
+    public meta?: { [index: string]: string; } | null;
 
     public constructor(init?: Partial<ResponseError>) { (Object as any).assign(this, init); }
 }
@@ -91,16 +92,16 @@ export class ResponseStatus
     public errorCode: string;
 
     // @DataMember(Order=2)
-    public message: string;
+    public message?: string | null;
 
     // @DataMember(Order=3)
-    public stackTrace: string;
+    public stackTrace?: string | null;
 
     // @DataMember(Order=4)
-    public errors: ResponseError[];
+    public errors?: ResponseError[] | null;
 
     // @DataMember(Order=5)
-    public meta: { [index: string]: string; };
+    public meta?: { [index: string]: string; } | null;
 
     public constructor(init?: Partial<ResponseStatus>) { (Object as any).assign(this, init); }
 }
@@ -108,7 +109,7 @@ export class ResponseStatus
 export class CompanyResponse
 {
     public result: Company;
-    public responseStatus: ResponseStatus;
+    public responseStatus?: ResponseStatus | null;
 
     public constructor(init?: Partial<CompanyResponse>) { (Object as any).assign(this, init); }
 }

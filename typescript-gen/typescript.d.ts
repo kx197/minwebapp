@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-01 14:21:23
+Date: 2021-01-01 20:14:27
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -15,6 +15,7 @@ BaseUrl: https://localhost:5001
 //DefaultImports: 
 */
 
+// @ts-nocheck
 
 interface IReturn<T>
 {
@@ -39,7 +40,7 @@ interface Company
     name: string;
 
     // @DataMember
-    subname: string;
+    subname?: string | null;
 
     // @DataMember
     // @Required()
@@ -50,16 +51,16 @@ interface Company
     statusDate: string;
 
     // @DataMember
-    turnoverCurrencyId: string;
+    turnoverCurrencyId?: string | null;
 
     // @DataMember
-    turnoverAmount: number;
+    turnoverAmount?: number | null;
 
     // @DataMember
-    employeeCount: number;
+    employeeCount?: number | null;
 
     // @DataMember
-    note: string;
+    note?: string | null;
 }
 
 // @DataContract
@@ -69,13 +70,13 @@ interface ResponseError
     errorCode: string;
 
     // @DataMember(Order=2)
-    fieldName: string;
+    fieldName?: string | null;
 
     // @DataMember(Order=3)
-    message: string;
+    message?: string | null;
 
     // @DataMember(Order=4)
-    meta: { [index: string]: string; };
+    meta?: { [index: string]: string; } | null;
 }
 
 // @DataContract
@@ -85,22 +86,22 @@ interface ResponseStatus
     errorCode: string;
 
     // @DataMember(Order=2)
-    message: string;
+    message?: string | null;
 
     // @DataMember(Order=3)
-    stackTrace: string;
+    stackTrace?: string | null;
 
     // @DataMember(Order=4)
-    errors: ResponseError[];
+    errors?: ResponseError[] | null;
 
     // @DataMember(Order=5)
-    meta: { [index: string]: string; };
+    meta?: { [index: string]: string; } | null;
 }
 
 interface CompanyResponse
 {
     result: Company;
-    responseStatus: ResponseStatus;
+    responseStatus?: ResponseStatus | null;
 }
 
 // @Route("/company", "GET")
