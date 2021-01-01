@@ -213,3 +213,63 @@ Project was generated  from the following:
     
     $ x new web MiniWebApp
 
+
+
+# Update-1
+
+I added customisation code for the generated logic, which can now correctly identify required properties, using method `IsRequiredProp(prop)`.
+
+The corresponding generated TypeScript files have been updated following the customisation.
+
+```csharp
+// Customise TypeScript generation for client
+private void ConfigureTypeScriptGenerator(Container container)
+{
+    // Disable TypeScript compiler errors
+    TypeScriptGenerator.InsertCodeFilter =
+        (List<MetadataType> allTypes, MetadataTypesConfig config) =>
+        { return "// @ts-nocheck"; };
+
+    TypeScriptGenerator.IsPropertyOptional = (gen, type, prop) =>
+    {
+        if (prop.IsPrimaryKey ?? false)
+        {
+            return false;
+        }
+        else if (IsRequiredProp(prop))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    };
+
+    TypeScriptGenerator.PropertyTypeFilter = (gen, type, prop) =>
+    {
+        if (prop.IsPrimaryKey ?? false)
+        {
+            return gen.GetPropertyType(prop, out var isNullable);
+        }
+        else if (IsRequiredProp(prop))
+        {
+            return gen.GetPropertyType(prop, out var isNullable);
+        }
+        else
+        {
+            return gen.GetPropertyType(prop, out var isNullable) + " | null";
+        }
+    };
+}
+
+// Used because prop.IsRequired is always true
+private bool IsRequiredProp(MetadataPropertyType prop)
+{
+    var attributes = prop.Attributes;
+    return attributes?.Any(i => "Required".Equals(i.Name)) ?? false;
+}
+```
+
+
+
