@@ -68,7 +68,7 @@ namespace MinWebApp
                 {
                     return false;
                 }
-                else if (IsRequiredProp(prop))
+                else if (prop.IsRequired ?? false)
                 {
                     return false;
                 }
@@ -84,7 +84,7 @@ namespace MinWebApp
                 {
                     return gen.GetPropertyType(prop, out var isNullable);
                 }
-                else if (IsRequiredProp(prop))
+                else if (prop.IsRequired ?? false) 
                 {
                     return gen.GetPropertyType(prop, out var isNullable);
                 }
@@ -93,13 +93,6 @@ namespace MinWebApp
                     return gen.GetPropertyType(prop, out var isNullable) + " | null";
                 }
             };
-        }
-
-        // Used because prop.IsRequired is always true
-        private bool IsRequiredProp(MetadataPropertyType prop)
-        {
-            var attributes = prop.Attributes;
-            return attributes?.Any(i => "Required".Equals(i.Name)) ?? false;
         }
     }
 }
