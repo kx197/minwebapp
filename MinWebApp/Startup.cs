@@ -45,7 +45,8 @@ namespace MinWebApp
         {
             SetConfig(new HostConfig
             {
-                DebugMode = AppSettings.Get(nameof(HostConfig.DebugMode), false)
+                DebugMode = AppSettings.Get(nameof(HostConfig.DebugMode), false),
+                TreatNonNullableRefTypesAsRequired = true    // Note: not applicable to Value types
             });
 
             // Register plugins
@@ -62,37 +63,12 @@ namespace MinWebApp
             // Disable TypeScript compiler errors
             TypeScriptGenerator.InsertTsNoCheck = true;
 
+            TypeScriptGenerator.UseNullableProperties = true;
+
             TypeScriptGenerator.IsPropertyOptional = (gen, type, prop) =>
             {
-                if (prop.IsPrimaryKey ?? false)
-                {
-                    return false;
-                }
-                else if (prop.IsRequired ?? false)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            };
-
-            TypeScriptGenerator.PropertyTypeFilter = (gen, type, prop) =>
-            {
-                if (prop.IsPrimaryKey ?? false)
-                {
-                    return gen.GetPropertyType(prop, out var isNullable);
-                }
-                else if (prop.IsRequired ?? false) 
-                {
-                    return gen.GetPropertyType(prop, out var isNullable);
-                }
-                else
-                {
-                    return gen.GetPropertyType(prop, out var isNullable) + " | null";
-                }
-            };
+                return !(prop.IsRequired ?? false);
+            };               
         }
     }
 }
