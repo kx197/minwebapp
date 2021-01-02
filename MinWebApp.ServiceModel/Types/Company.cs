@@ -9,7 +9,7 @@ namespace MinWebApp.ServiceModel.Types
     public class Company
     {
         [AutoId]
-        [DataMember, PrimaryKey, Required] 
+        [DataMember, Required] 
         public Guid Id { get; set; } = Guid.Empty;
 
         [DataMember, Required] 
