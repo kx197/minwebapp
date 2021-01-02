@@ -60,9 +60,7 @@ namespace MinWebApp
         private void ConfigureTypeScriptGenerator(Container container)
         {
             // Disable TypeScript compiler errors
-            TypeScriptGenerator.InsertCodeFilter =
-                (List<MetadataType> allTypes, MetadataTypesConfig config) =>
-                { return "// @ts-nocheck"; };
+            TypeScriptGenerator.InsertTsNoCheck = true;
 
             TypeScriptGenerator.IsPropertyOptional = (gen, type, prop) =>
             {
