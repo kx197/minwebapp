@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-02 09:37:24
+Date: 2021-01-02 09:49:10
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -68,7 +68,7 @@ interface Company
 interface ResponseError
 {
     // @DataMember(Order=1)
-    errorCode: string|null;
+    errorCode?: string|null;
 
     // @DataMember(Order=2)
     fieldName?: string|null;
@@ -84,7 +84,7 @@ interface ResponseError
 interface ResponseStatus
 {
     // @DataMember(Order=1)
-    errorCode: string|null;
+    errorCode?: string|null;
 
     // @DataMember(Order=2)
     message?: string|null;
@@ -101,7 +101,7 @@ interface ResponseStatus
 
 interface CompanyResponse
 {
-    result: Company|null;
+    result?: Company|null;
     responseStatus?: ResponseStatus|null;
 }
 
@@ -109,6 +109,6 @@ interface CompanyResponse
 // @Route("/company/{Name}", "GET")
 interface GetCompany extends IReturn<CompanyResponse>
 {
-    name: string|null;
+    name?: string|null;
 }
 

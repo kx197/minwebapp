@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-02 09:37:36
+Date: 2021-01-02 09:48:55
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -72,7 +72,7 @@ export class Company
 export class ResponseError
 {
     // @DataMember(Order=1)
-    public errorCode: string|null;
+    public errorCode?: string|null;
 
     // @DataMember(Order=2)
     public fieldName?: string|null;
@@ -90,7 +90,7 @@ export class ResponseError
 export class ResponseStatus
 {
     // @DataMember(Order=1)
-    public errorCode: string|null;
+    public errorCode?: string|null;
 
     // @DataMember(Order=2)
     public message?: string|null;
@@ -109,7 +109,7 @@ export class ResponseStatus
 
 export class CompanyResponse
 {
-    public result: Company|null;
+    public result?: Company|null;
     public responseStatus?: ResponseStatus|null;
 
     public constructor(init?: Partial<CompanyResponse>) { (Object as any).assign(this, init); }
@@ -119,7 +119,7 @@ export class CompanyResponse
 // @Route("/company/{Name}", "GET")
 export class GetCompany implements IReturn<CompanyResponse>
 {
-    public name: string|null;
+    public name?: string|null;
 
     public constructor(init?: Partial<GetCompany>) { (Object as any).assign(this, init); }
     public createResponse() { return new CompanyResponse(); }
