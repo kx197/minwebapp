@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-01 20:14:27
+Date: 2021-01-02 09:37:24
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -29,6 +29,7 @@ interface IReturnVoid
 interface Company
 {
     // @DataMember
+    // @Required()
     id: string;
 
     // @DataMember
@@ -40,7 +41,7 @@ interface Company
     name: string;
 
     // @DataMember
-    subname?: string | null;
+    subname?: string|null;
 
     // @DataMember
     // @Required()
@@ -51,63 +52,63 @@ interface Company
     statusDate: string;
 
     // @DataMember
-    turnoverCurrencyId?: string | null;
+    turnoverCurrencyId?: string|null;
 
     // @DataMember
-    turnoverAmount?: number | null;
+    turnoverAmount?: number|null;
 
     // @DataMember
-    employeeCount?: number | null;
+    employeeCount?: number|null;
 
     // @DataMember
-    note?: string | null;
+    note?: string|null;
 }
 
 // @DataContract
 interface ResponseError
 {
     // @DataMember(Order=1)
-    errorCode: string;
+    errorCode: string|null;
 
     // @DataMember(Order=2)
-    fieldName?: string | null;
+    fieldName?: string|null;
 
     // @DataMember(Order=3)
-    message?: string | null;
+    message?: string|null;
 
     // @DataMember(Order=4)
-    meta?: { [index: string]: string; } | null;
+    meta?: { [index: string]: string; }|null;
 }
 
 // @DataContract
 interface ResponseStatus
 {
     // @DataMember(Order=1)
-    errorCode: string;
+    errorCode: string|null;
 
     // @DataMember(Order=2)
-    message?: string | null;
+    message?: string|null;
 
     // @DataMember(Order=3)
-    stackTrace?: string | null;
+    stackTrace?: string|null;
 
     // @DataMember(Order=4)
-    errors?: ResponseError[] | null;
+    errors?: ResponseError[]|null;
 
     // @DataMember(Order=5)
-    meta?: { [index: string]: string; } | null;
+    meta?: { [index: string]: string; }|null;
 }
 
 interface CompanyResponse
 {
-    result: Company;
-    responseStatus?: ResponseStatus | null;
+    result: Company|null;
+    responseStatus?: ResponseStatus|null;
 }
 
 // @Route("/company", "GET")
 // @Route("/company/{Name}", "GET")
 interface GetCompany extends IReturn<CompanyResponse>
 {
-    name: string;
+    name: string|null;
 }
 

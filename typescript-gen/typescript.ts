@@ -1,5 +1,5 @@
 /* Options:
-Date: 2021-01-01 20:14:16
+Date: 2021-01-02 09:37:36
 Version: 5.103
 Tip: To override a DTO option, remove "//" prefix before updating
 BaseUrl: https://localhost:5001
@@ -31,6 +31,7 @@ export interface IReturnVoid
 export class Company
 {
     // @DataMember
+    // @Required()
     public id: string;
 
     // @DataMember
@@ -42,7 +43,7 @@ export class Company
     public name: string;
 
     // @DataMember
-    public subname?: string | null;
+    public subname?: string|null;
 
     // @DataMember
     // @Required()
@@ -53,16 +54,16 @@ export class Company
     public statusDate: string;
 
     // @DataMember
-    public turnoverCurrencyId?: string | null;
+    public turnoverCurrencyId?: string|null;
 
     // @DataMember
-    public turnoverAmount?: number | null;
+    public turnoverAmount?: number|null;
 
     // @DataMember
-    public employeeCount?: number | null;
+    public employeeCount?: number|null;
 
     // @DataMember
-    public note?: string | null;
+    public note?: string|null;
 
     public constructor(init?: Partial<Company>) { (Object as any).assign(this, init); }
 }
@@ -71,16 +72,16 @@ export class Company
 export class ResponseError
 {
     // @DataMember(Order=1)
-    public errorCode: string;
+    public errorCode: string|null;
 
     // @DataMember(Order=2)
-    public fieldName?: string | null;
+    public fieldName?: string|null;
 
     // @DataMember(Order=3)
-    public message?: string | null;
+    public message?: string|null;
 
     // @DataMember(Order=4)
-    public meta?: { [index: string]: string; } | null;
+    public meta?: { [index: string]: string; }|null;
 
     public constructor(init?: Partial<ResponseError>) { (Object as any).assign(this, init); }
 }
@@ -89,27 +90,27 @@ export class ResponseError
 export class ResponseStatus
 {
     // @DataMember(Order=1)
-    public errorCode: string;
+    public errorCode: string|null;
 
     // @DataMember(Order=2)
-    public message?: string | null;
+    public message?: string|null;
 
     // @DataMember(Order=3)
-    public stackTrace?: string | null;
+    public stackTrace?: string|null;
 
     // @DataMember(Order=4)
-    public errors?: ResponseError[] | null;
+    public errors?: ResponseError[]|null;
 
     // @DataMember(Order=5)
-    public meta?: { [index: string]: string; } | null;
+    public meta?: { [index: string]: string; }|null;
 
     public constructor(init?: Partial<ResponseStatus>) { (Object as any).assign(this, init); }
 }
 
 export class CompanyResponse
 {
-    public result: Company;
-    public responseStatus?: ResponseStatus | null;
+    public result: Company|null;
+    public responseStatus?: ResponseStatus|null;
 
     public constructor(init?: Partial<CompanyResponse>) { (Object as any).assign(this, init); }
 }
@@ -118,7 +119,7 @@ export class CompanyResponse
 // @Route("/company/{Name}", "GET")
 export class GetCompany implements IReturn<CompanyResponse>
 {
-    public name: string;
+    public name: string|null;
 
     public constructor(init?: Partial<GetCompany>) { (Object as any).assign(this, init); }
     public createResponse() { return new CompanyResponse(); }
